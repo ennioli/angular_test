@@ -1,0 +1,35 @@
+<p>books-list works!</p>
+<div class="books-list-container">
+    <!-- Genre Selection Dropdown -->
+    <div class="genre-selector">
+      <label for="genre-dropdown">Select Genre:</label>
+      <select id="genre-dropdown" [(ngModel)]="selectedGenre" (change)="filterBooks()">
+        <option value="">All Genres</option>
+        <option *ngFor="let genre of genres" [value]="genre">{{ genre }}</option>
+      </select>
+    </div>
+  
+    <!-- Books Table -->
+    <table *ngIf="filteredBooks.length > 0; else noBooksTemplate">
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Genre</th>
+          <th>Price</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let book of filteredBooks">
+          <td>{{ book.title }}</td>
+          <td>{{ book.genre }}</td>
+          <td>{{ book.price | currency:'USD' }}</td>
+        </tr>
+      </tbody>
+    </table>
+  
+    <!-- No Books Available Template -->
+    <ng-template #noBooksTemplate>
+      <p>No books available.</p>
+    </ng-template>
+  </div>
+  
